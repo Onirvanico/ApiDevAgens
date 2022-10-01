@@ -1,18 +1,25 @@
 package com.recode.devAgensApi.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
-public class Destino {
+public class Destino implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String local;
-	private String descricacao;
+	private String descricao;
+	@Lob
+	private byte[] imagem;
 	
 	public Destino() {
 		
@@ -20,7 +27,7 @@ public class Destino {
 	
 	public Destino(String local, String descricao) {
 		this.local = local;
-		this.descricacao = descricao;
+		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -39,14 +46,29 @@ public class Destino {
 		this.local = local;
 	}
 
-	public String getDescricacao() {
-		return descricacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricacao(String descricacao) {
-		this.descricacao = descricacao;
+	public void setDescricao(String descricacao) {
+		this.descricao = descricacao;
 	}
 	
 	
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+	
+	public byte[] getImagem() {
+		return imagem;
+	}
+	
 
+	@Override
+	public String toString() {
+		
+		return "id: " + this.id +
+				" local: " + this.local +
+				" descricação: " + this.descricao;
+	}
 }

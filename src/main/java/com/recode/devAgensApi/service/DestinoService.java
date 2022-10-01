@@ -24,7 +24,7 @@ public class DestinoService {
 	public Destino update(Integer id, Destino newDestino) {
 		Destino destino = repository.findById(id).get();
 		destino.setLocal(newDestino.getLocal());
-		destino.setDescricacao(newDestino.getDescricacao());
+		destino.setDescricao(newDestino.getDescricao());
 		return repository.save(destino);
 	}
 	

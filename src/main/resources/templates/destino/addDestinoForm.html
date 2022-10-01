@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="~{base_layout :: head}">
+</head>
+
+<body>
+
+<div th:replace="~{base_layout :: navbar}"></div>
+<div class="container">
+        <h1 class="mb-3">Cadastrar novo destino</h1>
+    <form action="#" th:object="${destino}" th:action="@{add}" method="post" enctype="multipart/form-data">
+        <div th:replace="~{base_layout :: form}"></div>
+
+        <div class="col-12 mt-2">
+            <button type="submit" class="btn btn-primary my-5 p-2">Cadastrar</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+</html>

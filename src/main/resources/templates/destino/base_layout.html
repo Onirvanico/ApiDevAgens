@@ -1,0 +1,121 @@
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar DevAgens</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" integrity="sha512-P9vJUXK+LyvAzj8otTOKzdfF1F3UYVl13+F8Fof8/2QNb8Twd6Vb+VD52I7+87tex9UXxnzPgWA3rH96RExA7A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <style>
+
+		.fadeOut {
+			transition: 1s ease-out;
+			opacity: 0;
+		}
+
+		.nav-link {
+			color: black;
+			font-size: 1.5em;
+			justify-content: flex-end;
+			margin-right: 15px;
+		}
+		
+		.buttons {
+			width: 8em;
+			height: auto;
+		}
+		
+		body {
+			background: linear-gradient(90deg, #aaaaff 0%, #2206ab 100%);
+		}
+		
+		label {
+			font-family: 'Roboto', sans-serif;
+			font-size: 1.5em;
+		}
+		
+		.logo {
+			margin-left: 15px;
+		}
+		
+		input[type='file'] {
+		    visibility: hidden;
+		}
+		
+		.visualizacao_imagem {
+		    border-radius: 5px;
+		    max-width: 100%;
+		    object-fit: scale-down;
+		    border: 2px solid black;
+		}
+		
+		.selecao_imagem {
+		    display: flex;
+		    justify-content: space-around;
+		    width: 100%;
+		   
+		}
+
+	</style>
+
+</head>
+
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg mb-3 d-flex justify-content-between">
+        <a class="logo" href="gerencia"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+  <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z"/>
+</svg></a>
+
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link active text-white"
+                                    aria-current="page" href="gerencia">Destino</a></li>
+            <li class="nav-item"><a class="nav-link text-white"
+                                    href="/?setor=tecnologia">Pacote</a></li>
+            <li class="nav-item"><a class="nav-link text-white"
+                                    href="/?setor=diretoria">Reserva</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/?setor=rh">Sobre</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div th:fragment="form">
+	<div class="form-group">
+        <label for="inputLocal" class="form-label">Local</label>
+        <input class="form-control" type="text" th:field="*{local}"  id="inputLocal" placeholder="Local" >
+    </div>
+
+    <div class="form-group">
+        <label for="inputDescricao" class="form-label">Descrição</label> <input
+            th:field="*{descricao}" type="text" class="form-control" id="inputDescricao" required>
+    </div>
+    <div class="form-group">
+			<label for="inputImagem" class="form-label">Carregar imagem</label>
+	    <div class="selecao_imagem">
+	        <div>
+	            <input type="button" class="button_file  btn btn-secondary me-2" id="inputImagem"
+	                 value="Adicionar imagem"/>
+	        </div>
+	        <div class="selecao_imagem">
+	            <img class="visualizacao_imagem" th:src="|/destino/image/*{id}|"/>
+	        </div>
+	        <input id="formImgLg" type="file" accept="image/*" name="imagemDestino" th:field="*{imagem}" />
+	    </div>
+    </div>
+    <script>
+        const $ = document.querySelector.bind(document);
+        const visualizacaoImagem = $(".visualizacao_imagem");
+        const inputFile = $("#formImgLg");
+        const buttonFile = $(".button_file");
+
+        buttonFile.onclick = () => inputFile.click();
+        inputFile.onchange = e => {
+            let arquivoUpload = e.target.files.item(0);
+            console.log("Image: ", arquivoUpload);
+            const fileReader = new FileReader();
+
+            fileReader.onload = e => visualizacaoImagem.src = e.target.result;
+            fileReader.readAsDataURL(arquivoUpload);
+        };
+
+    </script>
+</div>
