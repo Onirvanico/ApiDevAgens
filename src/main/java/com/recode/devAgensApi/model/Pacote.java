@@ -8,8 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Pacote implements Serializable{
@@ -19,11 +18,14 @@ public class Pacote implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name = "preco")
 	private BigDecimal preco;
+	
 	@Column(name = "dias_estadia")
 	private byte diasEstadia;
-	@OneToOne
+	
+	@ManyToOne
 	private Destino destino;
 	
 	public Pacote() {

@@ -12,24 +12,41 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 	
+	private static final String DESTINO_PATH = "destino";
+	private static final String PACOTE_PATH = "pacote";
+	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**");
 	}
 
 	
-	  @Bean public ClassLoaderTemplateResolver secondaryTemplateResolver() {
-	  ClassLoaderTemplateResolver secondaryTemplateResolver = new
-	  ClassLoaderTemplateResolver();
-	  secondaryTemplateResolver.setPrefix("templates/destino/");
-	  secondaryTemplateResolver.setSuffix(".html");
-	  secondaryTemplateResolver.setTemplateMode(TemplateMode.HTML);
-	  secondaryTemplateResolver.setCharacterEncoding("UTF-8");
-	  secondaryTemplateResolver.setOrder(1);
-	  secondaryTemplateResolver.setCheckExistence(true);
+	@Bean 
+    public ClassLoaderTemplateResolver destinoTemplateResolver() {
+	 
+		  return createTemplateResolver(DESTINO_PATH);
 	  
-	  return secondaryTemplateResolver;
+	}
+	
+	@Bean 
+    public ClassLoaderTemplateResolver pacoteTemplateResolver() {
+	 
+		  return createTemplateResolver(PACOTE_PATH);
 	  
-	  }
+	}
+	  
+    public ClassLoaderTemplateResolver createTemplateResolver(String folder) {
+    	
+    	  ClassLoaderTemplateResolver secondaryTemplateResolver = new
+		  ClassLoaderTemplateResolver();
+	  		  
+		  secondaryTemplateResolver.setPrefix(String.format("templates/%s/", folder));
+		  secondaryTemplateResolver.setSuffix(".html");
+		  secondaryTemplateResolver.setTemplateMode(TemplateMode.HTML);
+		  secondaryTemplateResolver.setCharacterEncoding("UTF-8");
+		  secondaryTemplateResolver.setOrder(1);
+		  secondaryTemplateResolver.setCheckExistence(true);
+		  return secondaryTemplateResolver;
+	}
 	 
 }

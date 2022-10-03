@@ -1,12 +1,17 @@
 package com.recode.devAgensApi.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Destino implements Serializable {
@@ -20,6 +25,10 @@ public class Destino implements Serializable {
 	private String descricao;
 	@Lob
 	private byte[] imagem;
+	
+	@Cascade(CascadeType.DELETE)
+	@OneToMany(mappedBy = "destino")
+	private List<Pacote> pacotes;
 	
 	public Destino() {
 		

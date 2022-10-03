@@ -19,7 +19,8 @@
  * @Autowired DestinoRepository repository;
  * 
  * @GetMapping("/gerencia") public String gerencia(Model model) { List<Destino>
- * destinos = repository.findAll();
+ * destinos = repository.findAll(); model.addAttribute("destinos", destinos);
+ * return "destino/gerencia"; }
  * 
- * model.addAttribute("destinos", destinos); return "destino/gerencia"; } }
+ * }
  */
