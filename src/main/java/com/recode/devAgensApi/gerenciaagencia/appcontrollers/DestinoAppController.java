@@ -28,60 +28,71 @@ import com.recode.devAgensApi.repository.DestinoRepository;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class DestinoAppController {
 	
-	@Autowired DestinoRepository repository;
+	@Autowired
+	DestinoRepository repository;    
 	
 	@GetMapping("/gerencia") 
 	public String gerencia(Model model) {
 		List<Destino> destinos = repository.findAll();
 		              
-		model.addAttribute("destinos", destinos);
+		model.addAttribute("destinos", destinos); 
 		return "/destino/gerencia";
-	}
-	
+	}  
+	      
 	@GetMapping("/form")
 	public String  destinosForm(Destino destino) {
-		 
+		             
 		return "/destino/addDestinoForm";
-	}
-	
+	}   
+	    
 	@PostMapping("/add") 
 	public String addDestino(RedirectAttributes attributes, @Validated Destino destino, BindingResult result, @RequestParam("imagemDestino") MultipartFile file) {
 		if(result.hasFieldErrors()) return "/destino/form";
 		
-		try {
+		try { 
 			destino.setImagem(file.getBytes());
-			
+			 
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		  
+			e.printStackTrace(); 
+		}  
+		     
 		repository.save(destino);
 		attributes.addFlashAttribute("message", "Destino salvo com sucesso");
 		return "redirect:/destino/gerencia";
-	}
-	
-	@GetMapping("/form/{id}")
+	}                 
+	                
+	@GetMapping("/form/{id}")  
 	public String updateForm(Model model, @PathVariable("id") Integer id ) {
-		Destino destino = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user id " + id));
-		model.addAttribute("destino", destino);
-		return "/destino/updateForm";
-	}
-	
+		Destino destinoToChange = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user id " + id));
+		model.addAttribute("destino", destinoToChange);
+		return "/destino/updateForm";    
+	}      
+	  
 	@PostMapping("/form/update/{id}")
-	public String changeDestino(@Validated Destino destino, BindingResult result, @RequestParam("imagemDestino") MultipartFile file) {
+	public String changeDestino(RedirectAttributes attributes, @Validated Destino destino, BindingResult result, @RequestParam("imagemDestino") MultipartFile file) {
 		if(result.hasErrors()) return "redirect:/destino/form";
-		 
-		try {
-			destino.setImagem(file.getBytes());
-			System.out.println("Recebido " + destino.getImagem());
+		  
+		try { 
+			if(file.getOriginalFilename().isEmpty()) {
+			    Optional<Destino> optional = repository.findById(destino.getId());
+			    destino.setImagem(optional.get().getImagem());
+			}
+			else {
+				destino.setImagem(file.getBytes());
+				System.out.println("Veio preenchido" + file.getOriginalFilename());
+			}
+			
+			System.out.println("Recebido " + destino.getDescricao());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}           
+		
+		attributes.addFlashAttribute("message", "Destino atualizado com sucesso");
 		    
 		repository.save(destino);
 		return "redirect:/destino/gerencia";
 	}
-	
+	  
 	@GetMapping("/delete/{id}") 
 	public String deleteDestino(RedirectAttributes attributes, @PathVariable("id") Integer id, Model model) {
 		Destino destino = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user id " + id));

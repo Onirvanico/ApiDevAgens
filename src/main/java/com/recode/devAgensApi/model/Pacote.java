@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -23,7 +23,7 @@ public class Pacote implements Serializable{
 	private BigDecimal preco;
 	@Column(name = "dias_estadia")
 	private byte diasEstadia;
-	@ManyToOne
+	@OneToOne
 	private Destino destino;
 	
 	public Pacote() {

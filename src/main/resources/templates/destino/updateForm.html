@@ -12,12 +12,15 @@
 	    <form  th:object="${destino}" th:action="@{update/{id}(id=${destino.id})}" method="post" enctype="multipart/form-data">
 	        <div th:replace="~{base_layout :: form}"></div>
 	        <div class="col-12 mt-2">
-	            <button type="submit" class="btn btn-primary my-5 p-2">Atualizar</button>
+	            <button type="submit" class="btn btn-primary my-5 p-2" >Atualizar</button>
 	        </div>
 	    </form>
-	</div>
-	<scrip>
-		
+	</div>  
+	<script>
+      
+		/* function receiveValue(element) {
+				element.setAttribute("name", "imagemDestino"); 
+		} */
 	</script>
 
 </body>

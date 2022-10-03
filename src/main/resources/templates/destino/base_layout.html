@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,7 +85,7 @@
 <div th:fragment="form">
 	<div class="form-group">
         <label for="inputLocal" class="form-label">Local</label>
-        <input class="form-control" type="text" th:field="*{local}"  id="inputLocal" placeholder="Local" >
+        <input class="form-control" type="text" th:field="*{local}"  id="inputLocal" placeholder="Local" required>
     </div>
 
     <div class="form-group">
@@ -98,24 +102,31 @@
 	        <div class="selecao_imagem">
 	            <img class="visualizacao_imagem" th:src="|/destino/image/*{id}|"/>
 	        </div>
-	        <input id="formImgLg" type="file" accept="image/*" name="imagemDestino" th:field="*{imagem}" />
+       		
 	    </div>
-    </div>
+        <div >
+      			<input  id="formImgLg" type="file" accept="image/*" name="imagemDestino" data-image="teste" class="form-control-file" />
+      	</div>
+      
+</div>
     <script>
+    
         const $ = document.querySelector.bind(document);
         const visualizacaoImagem = $(".visualizacao_imagem");
         const inputFile = $("#formImgLg");
         const buttonFile = $(".button_file");
-
+        
         buttonFile.onclick = () => inputFile.click();
-        inputFile.onchange = e => {
-            let arquivoUpload = e.target.files.item(0);
-            console.log("Image: ", arquivoUpload);
-            const fileReader = new FileReader();
-
-            fileReader.onload = e => visualizacaoImagem.src = e.target.result;
-            fileReader.readAsDataURL(arquivoUpload);
-        };
+	        inputFile.onchange = e => {
+	            let arquivoUpload = e.target.files.item(0);
+	            console.log("Image: ", arquivoUpload);
+	            const fileReader = new FileReader();
+	
+	            fileReader.onload = e => visualizacaoImagem.src = e.target.result;
+	            fileReader.readAsDataURL(arquivoUpload);
+	        };
 
     </script>
 </div>
+
+</html>

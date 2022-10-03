@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
 
 <head th:replace="~{base_layout :: head}">
 	
@@ -19,7 +21,7 @@
         <tr class="table-dark">
             <th></th>
             <th scope="col">Local</th>
-            <th scope="col">Descricãoo</th>
+            <th scope="col">Descricão</th>
             <th scope="col">Imagem</th>
             <th scope="col"></th>
         </tr>
@@ -49,7 +51,6 @@
 		const message = $("#msg");
 		setTimeout(() => {
 			message.classList.add("fadeOut");
-		  	console.log("estou aqui");
 		}, 3000);
 		
 		setTimeout(() => message.parentNode.removeChild(message), 4000);
