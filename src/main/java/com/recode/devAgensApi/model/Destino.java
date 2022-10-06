@@ -61,7 +61,7 @@ public class Destino implements Serializable {
 
 	public void setDescricao(String descricacao) {
 		this.descricao = descricacao;
-	}
+	}  
 	
 	
 	public void setImagem(byte[] imagem) {

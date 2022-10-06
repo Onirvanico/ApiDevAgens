@@ -34,7 +34,7 @@ public class DestinoController {
 		
 		Destino savedDestino = service.save(destino);
 		return ResponseEntity.ok().body(savedDestino);
-	}
+	}    
 	
 	@PutMapping("{id}")
     public ResponseEntity<Destino> update(@PathVariable("id") Integer id, @RequestBody Destino destino) {

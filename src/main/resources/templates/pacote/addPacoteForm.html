@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="~{base_layout :: head}">
+</head>
+
+<body>
+
+	<div th:replace="~{base_layout_pacote :: navbar}"></div>
+
+	<div class="container">
+        <h1 class="mb-3">Cadastrar novo pacote</h1>
+	    <form action="#" th:object="${pacote}" th:action="@{add}" method="post">
+	        <div th:replace="~{base_layout_pacote :: form}"></div>
+	
+	        <div class="col-12 mt-2">
+	            <button type="submit" class="btn btn-primary my-5 p-2">Cadastrar</button>
+	        </div>
+	    </form>
+
+	</div>
+
+</body>
+
+</html>

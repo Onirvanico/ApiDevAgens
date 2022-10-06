@@ -41,22 +41,32 @@ public class Pacote implements Serializable{
 	public Integer getId() {
 		return id;
 	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public BigDecimal getPreco() {
 		return preco;
 	}
+	
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
+	
 	public byte getDiasEstadia() {
 		return diasEstadia;
 	}
+	
 	public void setDiasEstadia(byte diasEstadia) {
 		this.diasEstadia = diasEstadia;
 	}
 	
+	public void setDestino(Destino destino) {
+		this.destino = destino;
+	}
 	
-	
+	public Destino getDestino() {
+		return destino;
+	}
 }

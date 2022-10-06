@@ -43,18 +43,18 @@ public class DestinoAppController {
 	public String  destinosForm(Destino destino) {
 		             
 		return "/destino/addDestinoForm";
-	}   
-	    
+	}       
+	                             
 	@PostMapping("/add") 
 	public String addDestino(RedirectAttributes attributes, @Validated Destino destino, BindingResult result, @RequestParam("imagemDestino") MultipartFile file) {
 		if(result.hasFieldErrors()) return "/destino/form";
-		
-		try { 
+		    
+		try {                          
 			destino.setImagem(file.getBytes());
-			 
+			     
 		} catch (IOException e) {
 			e.printStackTrace(); 
-		}  
+		}    
 		     
 		repository.save(destino);
 		attributes.addFlashAttribute("message", "Destino salvo com sucesso");
@@ -80,12 +80,11 @@ public class DestinoAppController {
 			else {
 				destino.setImagem(file.getBytes());
 				System.out.println("Veio preenchido" + file.getOriginalFilename());
-			}
-			
-			System.out.println("Recebido " + destino.getDescricao());
+			}                              
+			     
 		} catch (IOException e) {
 			e.printStackTrace();
-		}           
+		}            
 		
 		attributes.addFlashAttribute("message", "Destino atualizado com sucesso");
 		    

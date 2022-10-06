@@ -50,7 +50,7 @@
 		    border-radius: 5px;
 		    max-width: 100%;
 		    object-fit: scale-down;
-		    border: px solid black;
+		    border: 2px solid black;
 		}
 		
 		.selecao_imagem {
@@ -80,54 +80,31 @@
             <li class="nav-item"><a class="nav-link text-white" href="/?setor=rh">Sobre</a></li>
         </ul>
     </nav>
-</div>
+</div> 
 
 <div th:fragment="form">
-	<div class="form-group">
-        <label for="inputLocal" class="form-label">Local</label>
-        <input class="form-control" type="text" th:field="*{local}"  id="inputLocal" placeholder="Local" required>
-    </div>
-
     <div class="form-group">
-        <label for="inputDescricao" class="form-label">Descrição</label> <input
-            th:field="*{descricao}" type="text" class="form-control" id="inputDescricao" required>
+        <label for="inputDiasEstadia" class="form-label">Dias de Estadia</label> <input
+            th:field="*{diasEstadia}" type="text" class="form-control" id="inputDiasEstadia" required>
     </div>
+       
     <div class="form-group">
-			<label for="inputImagem" class="form-label">Carregar imagem</label>
-	    <div class="selecao_imagem">
-	        <div>
-	            <input type="button" class="button_file  btn btn-secondary me-2" id="inputImagem"
-	                 value="Adicionar imagem"/>
-	        </div>
-	        <div class="selecao_imagem"> 
-	            <img class="visualizacao_imagem" th:src="|/destino/image/*{id}|"/>
-	       
-	        </div>
-       		
-	    </div>
-        <div >
-      			<input  id="formImgLg" type="file" accept="image/*" name="imagemDestino" data-image="teste" class="form-control-file" />
-      	</div>
-      
-</div>
-    <script>
-    
-        const $ = document.querySelector.bind(document);
-        const visualizacaoImagem = $(".visualizacao_imagem");
-        const inputFile = $("#formImgLg");
-        const buttonFile = $(".button_file");
-        
-        buttonFile.onclick = () => inputFile.click();
-	        inputFile.onchange = e => {
-	            let arquivoUpload = e.target.files.item(0);
-	            console.log("Image: ", arquivoUpload);
-	            const fileReader = new FileReader();
-	
-	            fileReader.onload = e => visualizacaoImagem.src = e.target.result;
-	            fileReader.readAsDataURL(arquivoUpload);
-	        };
-
-    </script>
+        <label for="inputPreco" class="form-label">Preço</label> <input
+            th:field="*{preco}" type="text" class="form-control" id="inputPreco" required>
+            <!-- <span th:text="${#numbers.formatDecimal(pacote.preco, 3, 2, 'COMMA')}"></span> -->
+    </div>
+    <div class="form-group"> 
+        <label for="inputDestino" class="form-label">Destino</label>
+	    	<select class="form-select" aria-label="Lista de destinos" id="inputDestino" th:field="*{destino.id}">
+		    	<div th:if="*{destino.local == null}">  
+			    	<option selected value="0">Escolha um destino</option>
+			    </div>
+			    <div th:unless="*{destino.local == null}">
+			    	<option selected th:value="*{destino.id}"><span th:text="*{destino.local}"></span> </option>
+			    </div>     
+				  	<option th:each="dest : ${destinos}"  th:value="${dest.id}" th:unless="*{destino.id} == ${dest.id}" th:text="${dest.local}" ></option>
+   			</select>
+	</div>
 </div>
 
 </html>
