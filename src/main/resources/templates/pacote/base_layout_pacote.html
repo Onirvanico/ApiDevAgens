@@ -97,7 +97,7 @@
         <label for="inputDestino" class="form-label">Destino</label>
 	    	<select class="form-select" aria-label="Lista de destinos" id="inputDestino" th:field="*{destino.id}">
 		    	<div th:if="*{destino.local == null}">  
-			    	<option selected value="0">Escolha um destino</option>
+			    	<option selected th:value="*{destino.id}">Escolha um destino</option>
 			    </div>
 			    <div th:unless="*{destino.local == null}">
 			    	<option selected th:value="*{destino.id}"><span th:text="*{destino.local}"></span> </option>
