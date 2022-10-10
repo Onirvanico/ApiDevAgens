@@ -17,10 +17,10 @@
 		    <p id="msg" th:text="${message}" class="alert alert-info"></p>    
 	    </div>
 	    <div th:unless="${pacotes.empty}">
-		    <table class="table table-light">
-		        <tr class="table-dark">
-		            <th></th>
-		            <th scope="col">Id</th>
+		    <table class="table table-light table-striped table-hover table-bordered border-light">
+		    <caption>Lista de pacotes</caption>
+		        <tr class="table-info">		        	
+		            <th scope="col">#</th>
 		            <th scope="col">Dias de estadia</th>
 		            <th scope="col">Preço</th>
 		            <th scope="col">Destino</th>
@@ -28,7 +28,6 @@
 		        </tr>
 		         
 		        <tr th:each="pacote : ${pacotes}">
-		            <th scope="row"></th>
 		            <td style="vertical-align:middle;"><span th:text="${pacote.id}"></span></td>
 		            <td style="vertical-align:middle;"><span th:text="${pacote.diasEstadia}"></span></td>
 		            <td style="vertical-align:middle;"><span th:text="${pacote.preco}"></span></td>
