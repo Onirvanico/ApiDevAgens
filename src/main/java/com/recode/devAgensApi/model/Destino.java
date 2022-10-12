@@ -23,6 +23,7 @@ public class Destino implements Serializable {
 	private Integer id;
 	private String local;
 	private String descricao;
+	
 	@Lob
 	private byte[] imagem;
 	
