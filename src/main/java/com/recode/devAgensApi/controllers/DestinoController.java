@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recode.devAgensApi.model.Destino;
@@ -26,6 +27,18 @@ public class DestinoController {
 	@GetMapping
 	public ResponseEntity<List<Destino>> getAll() {
 		List<Destino> destinos = service.getAll();
+		return ResponseEntity.ok().body(destinos);
+	}
+	
+	@GetMapping("{id}")  
+	public ResponseEntity<Destino> findById(@PathVariable("id") Integer id) {
+		Destino destino = service.findById(id);
+		return ResponseEntity.ok().body(destino);
+	}
+	
+	@GetMapping("limit")
+	public ResponseEntity<List<Destino>> retrieveUntil(@RequestParam("limit") int value) {
+		List<Destino> destinos = service.retrieveUntil(value);
 		return ResponseEntity.ok().body(destinos);
 	}
 	

@@ -17,6 +17,15 @@ public class DestinoService {
 		return repository.findAll();
 	}
 	
+	public Destino findById(Integer id) {
+		return repository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid id"));
+	}
+	
+	public List<Destino> retrieveUntil(int limit) {
+		return repository.retrieveUntil(limit);
+	}
+	
 	public Destino save(Destino destino) {
 		return repository.save(destino);
 	}
