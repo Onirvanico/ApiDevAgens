@@ -32,4 +32,12 @@ public class PacoteService {
 	public void remove(Integer id) {
 		repository.deleteById(id);
 	}
+	
+	public Pacote findById(Integer id) {
+		return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id"));
+	}
+
+	public List<Pacote> retrieveUntil(int limit) {
+		return repository.retrieveUntil(limit);
+	}
 }
