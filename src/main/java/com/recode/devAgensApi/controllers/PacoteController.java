@@ -25,7 +25,7 @@ public class PacoteController {
 	    List<Pacote> pacotes = service.getAll();
 	    return ResponseEntity.ok().body(pacotes);
 	}
-	
+	 
 	@GetMapping("limit")
 	public ResponseEntity<List<Pacote>> retrieveUntil(@RequestParam("limit") int limit) {
 		List<Pacote> pacotes = service.retrieveUntil(limit);

@@ -24,6 +24,7 @@ public class DestinoController {
 	@Autowired
 	private DestinoService service;
 	
+//	@PreAuthorize("permitAll")
 	@GetMapping
 	public ResponseEntity<List<Destino>> getAll() {
 		List<Destino> destinos = service.getAll();
