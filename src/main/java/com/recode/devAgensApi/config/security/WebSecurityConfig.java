@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig{
@@ -30,8 +30,8 @@ public class WebSecurityConfig{
 			.httpBasic()
 			.and()
 			.authorizeHttpRequests(requests-> requests
-					 // .antMatchers(HttpMethod.GET, "/destinos/**")
-					//.antMatchers(HttpMethod.GET, "/pacotes/**").permitAll()
+					 .antMatchers(HttpMethod.GET, "/destinos/**").permitAll()
+					.antMatchers(HttpMethod.GET, "/pacotes/**").permitAll()
 					//.antMatchers(HttpMethod.GET, "/destino/**").hasRole("ADMIN")
 					//.antMatchers(HttpMethod.GET, "/pacote/**").permitAll()  
 					//.antMatchers(HttpMethod.GET, "/usuarios/**").hasRole("USER")
@@ -40,7 +40,8 @@ public class WebSecurityConfig{
 				/*
 				 * .formLogin(form -> form .loginPage("/login") .permitAll())
 				 */
-			.logout(logout -> logout.permitAll());
+			.logout(logout -> logout.permitAll())
+			.cors().disable();
 			
 	/*		.antMatchers(HttpMethod.GET, "/destinos/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/pacotes/**").permitAll()
