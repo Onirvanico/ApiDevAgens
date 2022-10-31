@@ -33,9 +33,10 @@ public class Usuario implements UserDetails, Serializable{
 	private String email;
 	
 	@Column(nullable = false, name = "senha")
-	private String senha;
+	private String senha;	
 	
 	@ManyToMany
+	@Column(nullable = true)
 	@JoinTable(name = "tb_users_rules", 
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "rule_id"))

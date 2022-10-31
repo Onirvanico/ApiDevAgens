@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,18 +33,24 @@ public class WebSecurityConfig{
 			.httpBasic()
 			.and()
 			.authorizeHttpRequests(requests-> requests
-					 .antMatchers(HttpMethod.GET, "/destinos/**").permitAll()
+					.antMatchers(HttpMethod.GET, "/destinos/**").permitAll()
 					.antMatchers(HttpMethod.GET, "/pacotes/**").permitAll()
+					.antMatchers(HttpMethod.POST, "/auth/**").permitAll()
+					.antMatchers(HttpMethod.GET, "/auth/**").permitAll()
+					.antMatchers(HttpMethod.POST, "/reservas/**").permitAll()
+					.antMatchers(HttpMethod.GET, "/reservas/**").permitAll()
 					//.antMatchers(HttpMethod.GET, "/destino/**").hasRole("ADMIN")
 					//.antMatchers(HttpMethod.GET, "/pacote/**").permitAll()  
 					//.antMatchers(HttpMethod.GET, "/usuarios/**").hasRole("USER")
+				    //.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 					.anyRequest().authenticated()
 					)
-				/*
-				 * .formLogin(form -> form .loginPage("/login") .permitAll())
-				 */
+				
+				  //.formLogin(form -> form .loginPage("/login").permitAll())
+				 
 			.logout(logout -> logout.permitAll())
-			.cors().disable();
+			.csrf().disable();
+			//.cors().disable();
 			
 	/*		.antMatchers(HttpMethod.GET, "/destinos/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/pacotes/**").permitAll()
@@ -67,5 +76,6 @@ public class WebSecurityConfig{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 
 }
